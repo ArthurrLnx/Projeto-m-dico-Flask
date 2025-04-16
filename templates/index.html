@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Médicos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Lista de Médicos</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <a href="{{ url_for('adicionar') }}" class="btn">Adicionar Novo Médico</a>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>Especialidade</th>
+            <th>Ações</th>
+        </tr>
+        {% for medico in medicos %}
+        <tr>
+            <td>{{ medico[0] }}</td>
+            <td>{{ medico[1]}}</td>
+            <td>{{ medico[2] }}</td>
+            <td>{{ medico[3] }}</td>
+            <td>{{ medico[4] }}</td>
+            <td class="action-links">
+                <a href="{{ url_for('editar', id=medico[0]) }}">Editar</a>
+                <a href="{{ url_for('excluir', id=medico[0]) }}" onclick="return confirm('Tem certeza?')">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Editar Médico</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Editar Médico</h1>
+    <form method="POST">
+        <label>Nome:</label>
+        <input type="text" name="nome" value="{{ medico.nome }}" required>
+
+        <label>CPF:</label>
+        <input type="text" name="cpf" value="{{ medico.cpf }}" required>
+
+        <label>Telefone:</label>
+        <input type="text" name="telefone" value="{{ medico.telefone }}">
+
+        <label>Endereço:</label>
+        <input type="text" name="endereco" value="{{ medico.endereco }}">
+
+        <label>Sexo:</label>
+        <select name="sexo">
+            <option value="M" {% if medico.sexo =='M' %}selected{% endif %}>Masculino</option>
+            <option value="F" {% if medico.sexo =='F' %}selected{% endif %}>Feminino</option>
+        </select>
+
+        <label>Especialidade:</label>
+        <input type="text" name="especialidade" value="{{ medico.especialidade }}">
+
+        <button type="submit" class="btn">Atualizar</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</body>
+</html>
